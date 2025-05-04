@@ -13,7 +13,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Data to simulate images in categories
 const images = [
-    { fileName: "nature1.jpg", category: "Nature" },
+    { fileName: "WotB_Defender_1920х1080.jpg", category: "Nature" },
     { fileName: "urban1.jpg", category: "Urban" },
     { fileName: "abstract1.jpg", category: "Abstract" },
 ];
