@@ -3,14 +3,15 @@
 <%- include('./partials/header') %>
 <body>
     <header>
-        <h1>Categories</h1>
-        <p>Select a category to explore the media archive.</p>
+        <h1><%= title %> Images</h1>
     </header>
     <main>
         <ul>
-            <li><a href="#">Nature</a></li>
-            <li><a href="#">Urban</a></li>
-            <li><a href="#">Abstract</a></li>
+            <% images.forEach(image => { %>
+                <li>
+                    <img src="/uploads/<%= image.fileName %>" alt="<%= image.category %>">
+                </li>
+            <% }) %>
         </ul>
     </main>
 </body>
