@@ -1,26 +1,31 @@
-const express = require('express');
+const multer = require('multer');
 const path = require('path');
 
-const app = express();
-const PORT = 3000;
-
-// Set view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Routes
-app.get('/', (req, res) => {
-    res.render('index', { title: "Funkit - Media Archive" });
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads'); // Save to uploads directory
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Unique file name
+    }
 });
 
-app.get('/categories', (req, res) => {
-    res.render('categories', { title: "Categories" });
-});
+const upload = multer({ storage });
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// Upload route
+app.post('/upload', upload.single('image'), (req, res) => {
+    const imageFile = req.file;
+    const category = req.body.category;
+
+    if (!imageFile || !category) {
+        return res.status(400).send("All fields are required!");
+    }
+
+    // Save image details to database (or in-memory storage for now)
+    // Example:
+    // db.save({ fileName: imageFile.filename, category });
+
+    console.log(`Uploaded: ${imageFile.filename} to category: ${category}`);
+    res.send("Image uploaded successfully!");
 });
