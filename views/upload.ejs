@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+<body>
+    <header>
+        <h1>Upload an Image</h1>
+    </header>
+    <main>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="image">Select Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Nature">Nature</option>
+                <option value="Urban">Urban</option>
+                <option value="Abstract">Abstract</option>
+            </select>
+            
+            <button type="submit">Upload</button>
+        </form>
+    </main>
+</body>
+</html>
